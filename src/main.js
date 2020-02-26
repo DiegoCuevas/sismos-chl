@@ -1,8 +1,29 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+import App from "./App.vue";
 
-Vue.config.productionTip = false
+import Ionic from "@ionic/vue";
+import "@ionic/core/css/core.css";
+import "@ionic/core/css/ionic.bundle.css";
+import { IonicVueRouter } from "@ionic/vue";
+
+Vue.use(IonicVueRouter);
+Vue.config.productionTip = false;
+Vue.use(Ionic);
+
+
+const router = new IonicVueRouter({
+  routes: [
+    { path: "/", redirect: "/home" },
+    {
+      path: "/home",
+      name: "home",
+      component: () => import("./components/homePage")
+    }
+  ]
+});
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  router,
+  render: h => h(App)
+}).$mount("#app");
+
