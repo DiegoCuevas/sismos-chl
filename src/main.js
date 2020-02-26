@@ -1,6 +1,5 @@
 import Vue from "vue";
 import App from "./App.vue";
-
 import Ionic from "@ionic/vue";
 import "@ionic/core/css/core.css";
 import "@ionic/core/css/ionic.bundle.css";
@@ -16,8 +15,13 @@ const router = new IonicVueRouter({
     { path: "/", redirect: "/home" },
     {
       path: "/home",
-      name: "home",
-      component: () => import("./components/homePage")
+      name: "Home",
+      component: () => import("./components/HomePage")
+    },
+    {
+      path: "/map",
+      name: "Map",
+      component: () => import("./components/Map")
     }
   ]
 });
