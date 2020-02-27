@@ -1,6 +1,16 @@
 <template>
   <ion-page>
-
+    <ion-header>
+      <ion-toolbar color="dark">
+        <ion-title>
+          <ion-col>
+            <ion-router-link href="#/map"
+              >Mapa</ion-router-link
+            ></ion-col
+          >
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-content padding>
       <ion-list v-for="sismo in sismos" :key="sismo.id">{{
         sismo.reference

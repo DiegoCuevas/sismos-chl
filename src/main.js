@@ -16,7 +16,7 @@ const router = new IonicVueRouter({
     {
       path: "/home",
       name: "Home",
-      component: () => import("./components/HomePage")
+      component: () => import("./components/homePage")
     },
     {
       path: "/map",

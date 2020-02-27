@@ -2,7 +2,9 @@
   <ion-page>
     <ion-header>
       <ion-toolbar color="dark">
-        <ion-title>Sismos en chile</ion-title>
+        <ion-title>
+          <ion-router-link href="#/home">Info</ion-router-link></ion-title
+        >
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -10,10 +12,49 @@
         :accessToken="accessToken"
         :mapStyle.sync="mapStyle"
         :center="coordinates"
-        ><MglMarker  color="green" v-for="sismo of sismos" :key="sismo.id" :coordinates=[sismo.longitude,sismo.latitude]>
-          {{sismo}}
+      >
+        <MglMarker
+          v-for="sismo of low"
+          :key="sismo.chilean_time"
+          :coordinates="[sismo.longitude, sismo.latitude]"
+          color="green"
+        >
+          <MglPopup>
+            <ion-text
+              ><ion-note color="dark">{{ sismo.reference }}</ion-note
+              >----
+              <ion-note color="dark">{{ sismo.magnitude }}</ion-note></ion-text
+            >
+          </MglPopup>
         </MglMarker>
-        <v-icon slot="marker">mdi-map-marker</v-icon>
+        <MglMarker
+          v-for="sismo of medium"
+          :key="sismo.utc_time"
+          :coordinates="[sismo.longitude, sismo.latitude]"
+          color="yellow"
+        >
+          <MglPopup>
+            <ion-text
+              ><ion-note color="dark">{{ sismo.reference }}</ion-note
+              >----
+              <ion-note color="dark">{{ sismo.magnitude }}</ion-note></ion-text
+            >
+          </MglPopup>
+        </MglMarker>
+        <MglMarker
+          v-for="sismo of high"
+          :key="sismo.id"
+          :coordinates="[sismo.longitude, sismo.latitude]"
+          color="red"
+        >
+          <MglPopup>
+            <ion-text
+              ><ion-note color="dark">{{ sismo.reference }}</ion-note
+              >----
+              <ion-note color="dark">{{ sismo.magnitude }}</ion-note></ion-text
+            >
+          </MglPopup>
+        </MglMarker>
       </MglMap>
     </ion-content>
   </ion-page>
@@ -21,13 +62,14 @@
 
 <script>
 import Mapbox from "mapbox-gl";
-import { MglMap, MglMarker } from "vue-mapbox";
+import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
 import getSismos from "../getSismos";
 
 export default {
   components: {
     MglMap,
-    MglMarker
+    MglMarker,
+    MglPopup
   },
   data() {
     return {
@@ -39,7 +81,23 @@ export default {
       sismos: []
     };
   },
-
+  computed: {
+    low: function() {
+      return this.sismos.filter(function(sis) {
+        return sis.magnitude < 4;
+      });
+    },
+    medium: function() {
+      return this.sismos.filter(function(sis) {
+        return 4 < sis.magnitude;
+      });
+    },
+    high: function() {
+      return this.sismos.filter(function(sis) {
+        return sis.magnitude >= 5.0;
+      });
+    }
+  },
   created() {
     this.mapbox = Mapbox;
   },
