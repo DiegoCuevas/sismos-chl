@@ -8,16 +8,20 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <select interface="popover" v-model="selectedOption">
-        <option value="" selected disabled>Choose</option>
-        <option
-          v-for="(item, index) of sismos"
-          :key="index"
-          :value="[item.longitude, item.latitude]"
-        >
-          {{ item.reference }}
-        </option>
-      </select>
+      <div class="select">
+        <select interface="popover" v-model="selectedOption">
+          <option :value="selectedOption" selected disabled
+            >Choose a reference</option
+          >
+          <option
+            v-for="(item, index) of sismos"
+            :key="index"
+            :value="[item.longitude, item.latitude]"
+          >
+            {{ item.reference }}
+          </option>
+        </select>
+      </div>
       <MglMap
         :accessToken="accessToken"
         :mapStyle.sync="mapStyle"
@@ -31,11 +35,23 @@
           color="green"
         >
           <MglPopup>
-            <ion-text
-              ><ion-note color="dark">{{ sismo.reference }}</ion-note
-              >----
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>Reference</ion-card-subtitle>
+                <ion-card-content>
+                  {{ sismo.reference }}
+                </ion-card-content>
+                <ion-card-subtitle>Magnitude</ion-card-subtitle>
+                <ion-card-content>
+                  {{ sismo.magnitude }}
+                </ion-card-content>
+              </ion-card-header>
+            </ion-card>
+
+            <!-- <ion-text
+              ><ion-note color="dark"></ion-note>----
               <ion-note color="dark">{{ sismo.magnitude }}</ion-note></ion-text
-            >
+            > -->
           </MglPopup>
         </MglMarker>
         <MglMarker
@@ -45,11 +61,18 @@
           color="yellow"
         >
           <MglPopup>
-            <ion-text
-              ><ion-note color="dark">{{ sismo.reference }}</ion-note
-              >----
-              <ion-note color="dark">{{ sismo.magnitude }}</ion-note></ion-text
-            >
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>Reference</ion-card-subtitle>
+                <ion-card-content>
+                  {{ sismo.reference }}
+                </ion-card-content>
+                <ion-card-subtitle>Magnitude</ion-card-subtitle>
+                <ion-card-content>
+                  {{ sismo.magnitude }}
+                </ion-card-content>
+              </ion-card-header>
+            </ion-card>
           </MglPopup>
         </MglMarker>
         <MglMarker
@@ -59,11 +82,18 @@
           color="red"
         >
           <MglPopup>
-            <ion-text
-              ><ion-note color="dark">{{ sismo.reference }}</ion-note
-              >----
-              <ion-note color="dark">{{ sismo.magnitude }}</ion-note></ion-text
-            >
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>Reference</ion-card-subtitle>
+                <ion-card-content>
+                  {{ sismo.reference }}
+                </ion-card-content>
+                <ion-card-subtitle>Magnitude</ion-card-subtitle>
+                <ion-card-content>
+                  {{ sismo.magnitude }}
+                </ion-card-content>
+              </ion-card-header>
+            </ion-card>
           </MglPopup>
         </MglMarker>
       </MglMap>
@@ -119,3 +149,53 @@ export default {
   }
 };
 </script>
+<style>
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #222428;
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  line-height: 3;
+  background: #222428;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+select {
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  cursor: pointer;
+}
+/* Arrow */
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #222428;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: 0.25s all ease;
+  -o-transition: 0.25s all ease;
+  transition: 0.25s all ease;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+</style>
