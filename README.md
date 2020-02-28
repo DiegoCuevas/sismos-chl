@@ -8,7 +8,7 @@
 - Ionic version 5.4.16
 ```
 
-## For run the proyect you need install 
+## To run the proyect you need install 
 ```
 yarn install
 ```
