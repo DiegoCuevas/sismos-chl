@@ -8,10 +8,21 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
+      <select interface="popover" v-model="selectedOption">
+        <option value="" selected disabled>Choose</option>
+        <option
+          v-for="(item, index) of sismos"
+          :key="index"
+          :value="[item.longitude, item.latitude]"
+        >
+          {{ item.reference }}
+        </option>
+      </select>
       <MglMap
         :accessToken="accessToken"
         :mapStyle.sync="mapStyle"
-        :center="coordinates"
+        :center="selectedOption"
+        :zoom="9"
       >
         <MglMarker
           v-for="sismo of low"
@@ -77,14 +88,14 @@ export default {
         "pk.eyJ1IjoiZGllZ29jdWV2YXM1NzkiLCJhIjoiY2s3M2wxaDkxMGU1OTNvcjlqd2dnbHpodSJ9.yDf53qrKyKQb_oJXbP8T0w",
       //mapStyle: "mapbox://styles/diegocuevas579/ck73olf542ggf1imqn6tcsm2k",
       mapStyle: "mapbox://styles/mapbox/streets-v11",
-      coordinates: [-69.2861, -18.8798],
+      selectedOption: [-71.04, -29.52],
       sismos: []
     };
   },
   computed: {
     low: function() {
       return this.sismos.filter(function(sis) {
-        return sis.magnitude < 4;
+        return sis.magnitude <= 4;
       });
     },
     medium: function() {
@@ -94,7 +105,7 @@ export default {
     },
     high: function() {
       return this.sismos.filter(function(sis) {
-        return sis.magnitude >= 5.0;
+        return sis.magnitude >= 5;
       });
     }
   },
