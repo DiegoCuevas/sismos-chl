@@ -1,24 +1,24 @@
-# prueba-tecnica
+# Sismos-Chl
 
-## Project setup
+## Pre-Requisites
+```
+- Yarn version 1.17.3
+- Node version 12.10.0
+- Vue version @vue/cli 4.2.2
+- Ionic version 5.4.16
+```
+
+## For run the proyect you need install dependencies 
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### then you run the server with
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### the routes for aplication are 
 ```
-yarn build
+http://localhost:8080/ 
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
