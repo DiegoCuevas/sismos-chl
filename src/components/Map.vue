@@ -8,11 +8,8 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <div class="select">
+      <div class="select" :value="selectedOption">
         <select interface="popover" v-model="selectedOption">
-          <option :value="selectedOption" selected disabled
-            >Choose a reference</option
-          >
           <option
             v-for="(item, index) of sismos"
             :key="index"
@@ -161,7 +158,6 @@ select {
   background: #222428;
   background-image: none;
 }
-/* Remove IE arrow */
 select::-ms-expand {
   display: none;
 }
