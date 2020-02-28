@@ -12,7 +12,7 @@ Vue.use(Ionic);
 
 const router = new IonicVueRouter({
   routes: [
-    { path: "/", redirect: "/home" },
+    { path: "/", redirect: "/map" },
     {
       path: "/home",
       name: "Home",
