@@ -10,7 +10,7 @@
   "dependencies": {
     "@ionic/core": "^5.0.1",
     "@ionic/vue": "0.0.9",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.4",
     "mapbox-gl": "^1.8.1",
     "vue": "^2.6.11",
